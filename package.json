@@ -1,0 +1,87 @@
+{
+  "name": "docusaurus-plugin-open-with-llm",
+  "version": "0.1.0",
+  "description": "Add an Open with AI menu to Docusaurus docs pages, with Markdown copy and links to ChatGPT and Claude.",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./client": {
+      "types": "./dist/client/index.d.ts",
+      "import": "./dist/client/index.js",
+      "require": "./dist/client/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "clean": "rimraf dist",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src tests",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "keywords": [
+    "docusaurus",
+    "docusaurus-plugin",
+    "documentation",
+    "ai",
+    "llm",
+    "chatgpt",
+    "claude",
+    "markdown"
+  ],
+  "author": "mcclowes",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcclowes/docusaurus-plugin-open-with-llm.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mcclowes/docusaurus-plugin-open-with-llm/issues"
+  },
+  "homepage": "https://github.com/mcclowes/docusaurus-plugin-open-with-llm#readme",
+  "peerDependencies": {
+    "@docusaurus/core": "^3.0.0",
+    "@docusaurus/types": "^3.0.0",
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@docusaurus/core": "^3.9.2",
+    "@docusaurus/tsconfig": "^3.9.2",
+    "@docusaurus/types": "^3.9.2",
+    "@eslint/js": "^9.15.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^22.8.7",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
+    "eslint": "^9.15.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "jsdom": "^27.1.0",
+    "prettier": "^3.6.2",
+    "rimraf": "^6.1.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.15.0",
+    "vitest": "^4.0.8"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
