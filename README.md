@@ -1,6 +1,6 @@
 # Docusaurus plugin open with LLM
 
-Add an **Open with AI** menu to every Docusaurus docs page. Readers can copy the page as Markdown, view its raw Markdown, or open it as context in ChatGPT or Claude.
+Add an **Open with AI** menu to every Docusaurus docs page. Readers can copy, view, or download the page as Markdown, or open it as context in ChatGPT or Claude.
 
 The plugin supplies the UI and theme integration. Your site must also publish a Markdown version of each page at `<docs-route>/index.md`, or at the relative filename you configure with `markdownFile`.
 
@@ -22,6 +22,7 @@ That's enough to add the menu to docs pages. The default actions are:
 
 - Copy as Markdown
 - View as Markdown
+- Download as Markdown
 - Open in ChatGPT
 - Open in Claude
 

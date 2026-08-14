@@ -30,11 +30,21 @@ describe('OpenWithLlm', () => {
       'href',
       '/docs/guides/payments/index.md'
     )
+    expect(screen.getByRole('menuitem', { name: /Download as Markdown/ })).toHaveAttribute(
+      'download',
+      'index.md'
+    )
     expect(screen.getByRole('menuitem', { name: /Open in ChatGPT/ })).toHaveAttribute(
       'href',
       expect.stringContaining(
         encodeURIComponent('https://example.com/docs/guides/payments/index.md')
       )
+    )
+    expect(screen.getByRole('menuitem', { name: /Open in ChatGPT/ }).querySelector('svg')).not.toBe(
+      null
+    )
+    expect(screen.getByRole('menuitem', { name: /Open in Claude/ }).querySelector('svg')).not.toBe(
+      null
     )
   })
 

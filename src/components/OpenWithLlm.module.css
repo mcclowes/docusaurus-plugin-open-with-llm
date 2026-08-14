@@ -64,6 +64,22 @@
   text-decoration: none;
   cursor: pointer;
 }
+.menuItem:has(.providerIcon) {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.65rem;
+}
+.providerIcon {
+  width: 1.2rem;
+  height: 1.2rem;
+  flex: 0 0 auto;
+}
+.menuText {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
 .menuItem:hover,
 .menuItem:focus-visible {
   background: var(--ifm-color-emphasis-100);

@@ -5,6 +5,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import { usePluginData } from '@docusaurus/useGlobalData'
 import type { ResolvedOpenWithLlmOptions } from '../types'
 import styles from './OpenWithLlm.module.css'
+import { ChatGptIcon, ClaudeIcon } from './ProviderIcons'
 
 const PLUGIN_NAME = 'docusaurus-plugin-open-with-llm'
 
@@ -67,6 +68,12 @@ function CheckIcon() {
       <polyline points="20 6 9 17 4 12" />
     </svg>
   )
+}
+
+function ProviderIcon({ url }: { url: string }) {
+  if (url.includes('chatgpt.com')) return <ChatGptIcon className={styles.providerIcon} />
+  if (url.includes('claude.ai')) return <ClaudeIcon className={styles.providerIcon} />
+  return null
 }
 
 export default function OpenWithLlm() {
@@ -142,6 +149,16 @@ export default function OpenWithLlm() {
             <span className={styles.menuLabel}>View as Markdown</span>
             <span className={styles.menuHint}>Open the raw .md source</span>
           </a>
+          <a
+            role="menuitem"
+            className={styles.menuItem}
+            href={markdownUrl}
+            download={options.markdownFile}
+            onClick={() => setOpen(false)}
+          >
+            <span className={styles.menuLabel}>Download as Markdown</span>
+            <span className={styles.menuHint}>Save the .md source</span>
+          </a>
           {options.providers.map((provider) => (
             <a
               key={provider.label}
@@ -152,8 +169,11 @@ export default function OpenWithLlm() {
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
             >
-              <span className={styles.menuLabel}>{provider.label}</span>
-              <span className={styles.menuHint}>Pre-fill a chat with this page</span>
+              <ProviderIcon url={provider.url} />
+              <span className={styles.menuText}>
+                <span className={styles.menuLabel}>{provider.label}</span>
+                <span className={styles.menuHint}>Pre-fill a chat with this page</span>
+              </span>
             </a>
           ))}
         </div>
