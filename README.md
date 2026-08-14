@@ -121,6 +121,14 @@ npm run lint
 npm run build
 ```
 
+Run the example Docusaurus site with:
+
+```sh
+npm run example:start
+```
+
+For a dependency-free visual preview of the widget, run `npm run preview:start` and open `http://127.0.0.1:4173`.
+
 ## License
 
 MIT

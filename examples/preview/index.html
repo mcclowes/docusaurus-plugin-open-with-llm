@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Open with LLM plugin preview</title>
+    <style>
+      :root {
+        --primary: #5b4bdb;
+        --border: #dedee5;
+        --muted: #626477;
+        color: #20212b;
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #fff;
+      }
+      header {
+        height: 60px;
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        padding: 0 28px;
+        border-bottom: 1px solid var(--border);
+        font-weight: 650;
+      }
+      header a {
+        color: #373847;
+        text-decoration: none;
+        font-size: 14px;
+      }
+      .brand {
+        color: var(--primary);
+        font-size: 18px;
+      }
+      .page {
+        display: grid;
+        grid-template-columns: 240px minmax(0, 760px) 1fr;
+        gap: 44px;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 44px 28px;
+      }
+      nav {
+        color: var(--muted);
+        font-size: 14px;
+      }
+      nav strong,
+      nav a {
+        display: block;
+        padding: 7px 12px;
+      }
+      nav a {
+        color: var(--muted);
+        text-decoration: none;
+        border-radius: 5px;
+      }
+      nav a.active {
+        color: var(--primary);
+        background: #f0eefc;
+        font-weight: 600;
+      }
+      article {
+        min-width: 0;
+      }
+      h1 {
+        margin: 12px 0 16px;
+        font-size: 40px;
+        letter-spacing: -1.2px;
+      }
+      h2 {
+        margin-top: 38px;
+        font-size: 25px;
+      }
+      p {
+        color: #484a58;
+        line-height: 1.7;
+      }
+      code {
+        padding: 2px 5px;
+        border-radius: 4px;
+        background: #f1f2f4;
+        color: #30313d;
+      }
+      .toolbar {
+        display: flex;
+        justify-content: flex-end;
+      }
+      .widget {
+        position: relative;
+        display: inline-block;
+      }
+      .trigger {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 7px 12px;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        background: #fff;
+        color: #444653;
+        font: inherit;
+        font-size: 13px;
+        font-weight: 550;
+        cursor: pointer;
+      }
+      .trigger:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+      .trigger svg {
+        display: block;
+        flex-shrink: 0;
+      }
+      .menu {
+        position: absolute;
+        top: calc(100% + 6px);
+        right: 0;
+        z-index: 5;
+        display: none;
+        width: 250px;
+        padding: 6px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: 0 10px 28px rgb(20 20 40 / 12%);
+      }
+      .menu.open {
+        display: block;
+      }
+      .item {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+        padding: 9px 11px;
+        border: 0;
+        border-radius: 5px;
+        background: none;
+        color: #292a34;
+        font: inherit;
+        text-align: left;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .item:hover {
+        background: #f3f3f6;
+      }
+      .label {
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .hint {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .toc {
+        border-left: 1px solid var(--border);
+        padding-left: 18px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      @media (max-width: 800px) {
+        .page {
+          grid-template-columns: 1fr;
+        }
+        nav,
+        .toc {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header><span class="brand">Acme docs</span><a href="#">Payments</a></header>
+    <div class="page">
+      <nav>
+        <strong>Get started</strong><a class="active" href="#">Developer docs</a
+        ><a href="#">Accept a payment</a>
+      </nav>
+      <article>
+        <div class="toolbar">
+          <div class="widget">
+            <button class="trigger" type="button" aria-expanded="false">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2 2M16.4 16.4l2 2M5.6 18.4l2-2M16.4 7.6l2-2"
+                />
+              </svg>
+              <span id="button-label">Open with AI</span>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+            <div class="menu" role="menu">
+              <button class="item copy" type="button">
+                <span class="label">Copy as Markdown</span
+                ><span class="hint">Paste into any AI chat as context</span>
+              </button>
+              <a class="item" href="page/index.md" target="_blank"
+                ><span class="label">View as Markdown</span
+                ><span class="hint">Open the raw .md source</span></a
+              >
+              <a
+                class="item"
+                href="https://chatgpt.com/?q=Read%20http%3A%2F%2Flocalhost%3A4173%2Fpage%2Findex.md%20and%20answer%20my%20questions%20using%20it%20as%20context."
+                target="_blank"
+                ><span class="label">Open in ChatGPT</span
+                ><span class="hint">Pre-fill a chat with this page</span></a
+              >
+              <a
+                class="item"
+                href="https://claude.ai/new?q=Read%20http%3A%2F%2Flocalhost%3A4173%2Fpage%2Findex.md%20and%20answer%20my%20questions%20using%20it%20as%20context."
+                target="_blank"
+                ><span class="label">Open in Claude</span
+                ><span class="hint">Pre-fill a chat with this page</span></a
+              >
+            </div>
+          </div>
+        </div>
+        <h1>Build with Acme</h1>
+        <p>
+          These example docs show the <strong>Open with AI</strong> menu in context. Open the menu
+          above to copy this page as Markdown, view the source, or send its URL to an LLM.
+        </p>
+        <h2>Try the widget</h2>
+        <p>
+          The Markdown copy is served as a static file, just as it would be after a documentation
+          export step in a production site.
+        </p>
+        <p>Continue to <a href="#">accepting a payment</a> to try it on another route.</p>
+      </article>
+      <aside class="toc">On this page<br /><br />Try the widget</aside>
+    </div>
+    <script>
+      const trigger = document.querySelector('.trigger')
+      const menu = document.querySelector('.menu')
+      const label = document.querySelector('#button-label')
+      trigger.addEventListener('click', () => {
+        const open = menu.classList.toggle('open')
+        trigger.setAttribute('aria-expanded', String(open))
+      })
+      document.querySelector('.copy').addEventListener('click', async () => {
+        const text = await fetch('page/index.md').then((response) => response.text())
+        await navigator.clipboard.writeText(text)
+        menu.classList.remove('open')
+        trigger.setAttribute('aria-expanded', 'false')
+        label.textContent = 'Copied'
+        setTimeout(() => {
+          label.textContent = 'Open with AI'
+        }, 2000)
+      })
+      document.addEventListener('click', (event) => {
+        if (!event.target.closest('.widget')) {
+          menu.classList.remove('open')
+          trigger.setAttribute('aria-expanded', 'false')
+        }
+      })
+    </script>
+  </body>
+</html>
