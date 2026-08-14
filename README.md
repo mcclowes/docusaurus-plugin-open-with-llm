@@ -1,3 +1,5 @@
+![Docusaurus plugin open with LLM](./assets/readme-banner.png)
+
 # Docusaurus plugin open with LLM
 
 Add an **Open with AI** menu to every Docusaurus docs page. Readers can copy, view, or download the page as Markdown, or open it as context in ChatGPT or Claude.
