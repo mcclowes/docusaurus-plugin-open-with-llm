@@ -2,3 +2,4 @@ dist/
 examples/demo/.docusaurus/
 examples/demo/build/
 node_modules/
+.claude/
