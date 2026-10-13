@@ -32,10 +32,11 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run",
+    "test:package": "node --test scripts/package-check.mjs",
     "example:start": "npm run build && docusaurus start examples/demo",
     "example:build": "npm run build && docusaurus build examples/demo",
     "preview:start": "python3 -m http.server 4173 --directory examples/preview",
-    "prepublishOnly": "npm run build && npm test"
+    "prepublishOnly": "npm run build && npm test && npm run test:package"
   },
   "keywords": [
     "docusaurus",

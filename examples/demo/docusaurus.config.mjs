@@ -19,7 +19,7 @@ export default {
       {
         docs: {
           routeBasePath: '/',
-          sidebarPath: path.join(here, 'sidebars.js'),
+          sidebarPath: path.join(here, 'sidebars.mjs'),
         },
         blog: false,
         theme: { customCss: path.join(here, 'src/css/custom.css') },
@@ -28,7 +28,7 @@ export default {
   ],
   plugins: [
     [
-      path.join(here, '../../dist/index.js'),
+      path.join(here, '../../dist/index.cjs'),
       {
         buttonLabel: 'Open with AI',
       },

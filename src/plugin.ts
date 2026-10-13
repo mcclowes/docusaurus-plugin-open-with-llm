@@ -38,15 +38,11 @@ export function resolveOptions(options: OpenWithLlmOptions = {}): ResolvedOpenWi
 }
 
 function resolveThemePath(): string {
-  const candidates: string[] = []
-
-  if (typeof __dirname === 'string') {
-    candidates.push(join(__dirname, 'theme'))
-  }
-  candidates.push(fileURLToPath(new URL('./theme', import.meta.url)))
-
-  const themePath = candidates.find(existsSync)
-  if (!themePath) {
+  const themePath =
+    typeof __dirname === 'string'
+      ? join(__dirname, 'theme')
+      : fileURLToPath(new URL('./theme', import.meta.url))
+  if (!existsSync(themePath)) {
     throw new Error('[docusaurus-plugin-open-with-llm] could not resolve the plugin theme path')
   }
   return themePath

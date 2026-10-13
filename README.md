@@ -122,6 +122,7 @@ npm test
 npm run typecheck
 npm run lint
 npm run build
+npm run test:package
 ```
 
 Run the example Docusaurus site with:
