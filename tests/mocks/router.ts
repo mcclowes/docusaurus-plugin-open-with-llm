@@ -1,1 +1,1 @@
-export const useLocation = () => ({ pathname: '/guides/payments/' })
+export const useLocation = () => ({ pathname: '/docs/guides/payments/' })
