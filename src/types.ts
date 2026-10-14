@@ -14,7 +14,7 @@ export interface OpenWithLlmOptions {
   markdownFile?: string
   /** Prompt sent to configured providers. Use `{url}` for the Markdown URL. */
   prompt?: string
-  /** LLM destinations shown after the copy and view actions. */
+  /** LLM destinations shown after the copy, view, and download actions. */
   providers?: ProviderOptions[]
 }
 
