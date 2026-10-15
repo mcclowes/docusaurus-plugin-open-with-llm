@@ -3,7 +3,7 @@ declare module '*.module.css' {
   export default classes
 }
 
-declare module '@theme-original/DocItem/Layout' {
+declare module '@theme-init/DocItem/Layout' {
   import type { ComponentType } from 'react'
   const Layout: ComponentType<Record<string, unknown>>
   export default Layout

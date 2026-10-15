@@ -10,8 +10,10 @@ import { ChatGptIcon, ClaudeIcon } from './ProviderIcons'
 const PLUGIN_NAME = 'docusaurus-plugin-open-with-llm'
 
 export function buildMarkdownUrl(pathname: string, baseUrl: string, markdownFile: string): string {
+  const basePath = baseUrl.replace(/\/$/, '')
   const route = pathname.endsWith('/') ? pathname : `${pathname}/`
-  return `${baseUrl.replace(/\/$/, '')}${route}${markdownFile}`
+  const prefix = route.startsWith(`${basePath}/`) ? '' : basePath
+  return `${prefix}${route}${markdownFile}`
 }
 
 export function buildAbsoluteUrl(siteUrl: string, relativeUrl: string): string {

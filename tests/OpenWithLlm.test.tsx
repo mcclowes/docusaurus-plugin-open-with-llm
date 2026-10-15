@@ -8,6 +8,18 @@ describe('URL helpers', () => {
     expect(buildMarkdownUrl('/guide/', '/docs/', 'page.md')).toBe('/docs/guide/page.md')
   })
 
+  it.each([
+    ['/docs/guide', '/docs/', 'index.md', '/docs/guide/index.md'],
+    ['/docs/guide/', '/docs/', 'page.md', '/docs/guide/page.md'],
+    ['/docs', '/docs/', 'index.md', '/docs/index.md'],
+    ['/manual/docs/guide', '/manual/', 'index.md', '/manual/docs/guide/index.md'],
+    ['/docs-extra/guide', '/docs/', 'index.md', '/docs/docs-extra/guide/index.md'],
+    ['/', '/', 'index.md', '/index.md'],
+    ['/guide', '/', 'page.md', '/guide/page.md'],
+  ])('keeps the base path once for %s', (pathname, baseUrl, filename, expected) => {
+    expect(buildMarkdownUrl(pathname, baseUrl, filename)).toBe(expected)
+  })
+
   it('makes URLs absolute when the site URL is valid', () => {
     expect(buildAbsoluteUrl('https://example.com', '/docs/guide/index.md')).toBe(
       'https://example.com/docs/guide/index.md'
@@ -55,6 +67,7 @@ describe('OpenWithLlm', () => {
     fireEvent.click(screen.getByRole('menuitem', { name: /Copy as Markdown/ }))
 
     await waitFor(() => expect(navigator.clipboard.writeText).toHaveBeenCalledWith('Page content'))
+    expect(fetch).toHaveBeenCalledWith('/docs/guides/payments/index.md')
     expect(screen.getByRole('button', { name: 'Copied' })).toBeInTheDocument()
   })
 })

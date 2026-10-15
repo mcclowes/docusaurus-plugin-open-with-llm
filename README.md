@@ -92,7 +92,7 @@ export default {
 | `prompt`       | `string`            | `"Read {url} and answer my questions using it as context."` | Set the provider prompt. It must contain `{url}`.               |
 | `providers`    | `ProviderOptions[]` | ChatGPT and Claude                                          | Replace the provider links. Each URL must contain `{prompt}`.   |
 
-Setting `providers` to an empty array leaves only the copy and view actions.
+Setting `providers` to an empty array leaves the copy, view, and download actions.
 
 ## Use the component directly
 
@@ -122,6 +122,7 @@ npm test
 npm run typecheck
 npm run lint
 npm run build
+npm run test:package
 ```
 
 Run the example Docusaurus site with:

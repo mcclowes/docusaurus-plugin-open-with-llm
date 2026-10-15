@@ -17,7 +17,7 @@ export default defineConfig({
     '@docusaurus/useBaseUrl',
     '@docusaurus/useDocusaurusContext',
     '@docusaurus/useGlobalData',
-    '@theme-original/DocItem/Layout',
+    '@theme-init/DocItem/Layout',
     'react',
     'react-dom',
   ],
